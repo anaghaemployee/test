@@ -1,5 +1,6 @@
 <?php 
 session_start();
+$err ='';
 $conn=mysqli_connect("localhost","root","","test");
 if(isset($_POST['email']) && isset($_POST['pass']))
 {
@@ -14,7 +15,7 @@ if(isset($_POST['email']) && isset($_POST['pass']))
 		$_SESSION['regId'] = $row['regId'];
 	}
 	else{
-		echo "Invalid Login Credentials.";
+		$err= "Invalid Login Credentials.";
 	}
 }
 if (isset($_SESSION['regId']))
@@ -38,29 +39,29 @@ function ValidateForm(){
 	var email=document.Myform.email.value;
 	if(email == null ||email == "")
 	{
-		alert("email id cannot be blank");
+		
+		document.getElementById('email').innerHTML="email id cannot be blank";	
 		return false;
 	}
 	else{
 		if (!(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email)))
 		  {
-		   alert("You have entered an invalid email address!")
-		    return false;
+			document.getElementById('email').innerHTML="You have entered an invalid email address!";	
+			return false;
 		  }
 	}
 	
 	var password=document.Myform.pass.value;
 	if(password == null ||password == "")
 	{
-		alert("Please enter password");
+		document.getElementById('pass').innerHTML="Please enter password";
 		return false;
 	}	
 	if(password.length < 3 || password.length >8)
 	{
-		alert(" password contain atleast 3 chracters and does not contain morethan 10characters");
+		document.getElementById('pass').innerHTML="password contain atleast 3 chracters and does not contain morethan 10characters";
 		return false;
 	}
-	
 }
 </script>
 	<body>
@@ -73,19 +74,22 @@ function ValidateForm(){
 					<span class="login100-form-title p-b-59">
 						Sign in
 					</span>
-
-					<div class="wrap-input100 validate-input" data-validate="Valid email is required: ex@abc.xyz">
+				<?php if($err != ''){?>
+				<span class="error" style="color:red;">* <?php echo $err;?></span>
+				<?php }?>
+					<div class="wrap-input100 validate-input" style="margin-bottom:15px;" data-validate="Valid email is required: ex@abc.xyz">
 						<span class="label-input100">Email</span>
 						<input class="input100" type="text" name="email" placeholder="Email addess...">
 						<span class="focus-input100"></span>
 					</div>
-					<div class="wrap-input100 validate-input" data-validate="Password is required">
+					<p id="email" style="color:red;font-size:20px;padding-bottom: 10px;"></p>
+					<div class="wrap-input100 validate-input"  style="margin-bottom:15px;" data-validate="Password is required">
 						<span class="label-input100">Password</span>
 						<input class="input100" type="password" name="pass" placeholder="*************">
 						<span class="focus-input100"></span>
 					</div>
 
-					
+					<p id="pass" style="color:red;font-size:20px;padding-bottom: 10px;"></p>
 
 					<div class="flex-m w-full p-b-33">
 						<div class="contact100-form-checkbox">
@@ -107,7 +111,7 @@ function ValidateForm(){
 							</button>
 						</div>
 
-						<a href="index.html" class="dis-block txt3 hov1 p-r-30 p-t-10 p-b-10 p-l-30">
+						<a href="index.php" class="dis-block txt3 hov1 p-r-30 p-t-10 p-b-10 p-l-30">
 							Sign Up
 							<i class="fa fa-long-arrow-right m-l-5"></i>
 						</a>

@@ -1,4 +1,5 @@
 <?php 
+$err ='';
 if(isset($_POST['submit']))
 {
 	$conn = mysqli_connect("localhost",'root','','test');	
@@ -29,7 +30,7 @@ if(isset($_POST['submit']))
 		$data=mysqli_num_rows($res);
 	if($data !== 0)
 	{
-		echo "existing user";		
+		$err= "existing user";		
 	}
 	else
 	{ 
@@ -55,7 +56,7 @@ if(isset($_POST['submit']))
 				$data1=mysqli_num_rows($res1);
 				if($data1 !== 0)
 				{
-					echo "existing user";
+					$err ="existing user";
 				}
 				else{
 				
@@ -81,70 +82,76 @@ if(isset($_POST['submit']))
    
 	</head>
 	<script type="text/javascript">
-function ValidateForm(){
-	
+function ValidateForm(){	
 	var name=document.Myform.name.value;
 	if(name == null ||name == "")
 	{
-		alert("Name cannot be blank");
+		
+		document.getElementById('names').innerHTML="Name cannot be blank";	
 		return false;
 	}
 	if(!isNaN(name))
 	{
-		alert("enter only characters");
+		
+		document.getElementById('names').innerHTML="enter only characters";	
 		return false;
 	}	
 	if(name.length < 2 || name.length > 20)
 	{
-		alert("Name contain  6 to 20 characters Only");
+		
+		document.getElementById('names').innerHTML="Name contain  6 to 20 characters Only";	
 		return false;
 	}
-	
 	
 	var email=document.Myform.email.value;
 	if(email == null ||email == "")
 	{
-		alert("email id cannot be blank");
+		
+		document.getElementById("emailid").innerHTML="email id cannot be blank";	
 		return false;
 	}
 	else{
 		if (!(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email)))
 		  {
-		   alert("You have entered an invalid email address!")
-		    return false;
+			document.getElementById("emailid").innerHTML="You have entered an invalid email address!";	
+			return false;
 		  }
 	}
+	
 	var year=document.Myform.year.value;
 	if(year == null ||year == "")
 	{
-		alert("Year cannot be blank");
+	
+		document.getElementById("y").innerHTML="Year cannot be blank";
 		return false;
 	}
 	var cls=document.Myform.cls.value;
 	if(cls == null ||cls == "")
 	{
-		alert("Class cannot be blank");
+	
+		document.getElementById("class").innerHTML="Class cannot be blank";
 		return false;
 	}
 	
 	var country=document.Myform.country.value;
 	if(country == null ||country == "")
 	{
-		alert("Country cannot be blank");
+		
+		document.getElementById("c").innerHTML="Country cannot be blank";
 		return false;
 	}
 	var state=document.Myform.state.value;
 	if(state == null ||state == "")
 	{
-		alert("State cannot be blank");
+		document.getElementById("s").innerHTML="State cannot be blank";
 		return false;
 	}
 	var city=document.Myform.city.value;
 	if(city == null ||city == "")
 	{
-		alert("City cannot be blank");
+		document.getElementById("citi").innerHTML="City cannot be blank";
 		return false;
-	}
+	}	
 }
 $( function() {
     $( "#datepicker" ).datepicker(
@@ -312,30 +319,36 @@ function MethodUpdate(val){
 					<span class="login100-form-title p-b-59" style="padding-left:125px;">
 						Student Form
 					</span>
+					<?php if($err != ''){?>
+				<span class="error" style="color:red;">* <?php echo $err;?></span>
+				<?php }?>
 					<input class="input100" type="hidden" id="userId" name="userId" value="">
 					
-					<div class="wrap-input100 validate-input" style="margin-left: 50px;width:75%;" data-validate="Name is required">
+					<div class="wrap-input100 validate-input" style="margin-left: 50px;width:margin-bottom:15px;width:75%;margin-bottom:15px;">
 						<span class="label-input100">Name</span>
 						<input class="input100" id="name" value="" type="text" name="name" placeholder="Name...">
 						<span class="focus-input100"></span>
 					</div>
-					<div class="wrap-input100 validate-input" style="margin-left: 50px;width:75%;" data-validate="Valid email is required: ex@abc.xyz">
+					<p id="names" style="color:red;font-size:20px;padding-bottom: 10px;margin-left:50px; "></p>
+					<div class="wrap-input100 validate-input" style="margin-left: 50px;width:75%;margin-bottom:15px;">
 						<span class="label-input100">Email</span>
 						<input class="input100" type="text" id="email" name="email" placeholder="Email addess...">
 						<span class="focus-input100"></span>
 					</div>
-				
-					<div class="wrap-input100 validate-input" style="margin-left: 50px;width:75%;" data-validate="Class is required">
+					<p id="emailid" style="color:red;font-size:20px;padding-bottom: 10px;margin-left:50px; "></p>
+					<div class="wrap-input100 validate-input" style="margin-left: 50px;width:75%;margin-bottom:15px;" >
 						<span class="label-input100">Class</span>
 						<input class="input100" type="text" id="cls" name="cls" placeholder="Class...">
 						<span class="focus-input100"></span>
 					</div>
-					<div class="wrap-input100 validate-input" style="margin-left: 50px;width:75%;" data-validate="Year is required">
+					<p id="class" style="color:red;font-size:20px;padding-bottom: 10px;margin-left:50px; "></p>
+					<div class="wrap-input100 validate-input" style="margin-left: 50px;width:75%;margin-bottom:15px;">
 						<span class="label-input100">Year</span>
 						<input class="input100" type="text" id="datepicker" name="year" placeholder="Year...">
 						<span class="focus-input100"></span>
 					</div>
-					<div class="wrap-input100 validate-input" style="margin-left: 50px;width:75%;" data-validate="country is required">
+					<p id="y" style="color:red;font-size:20px;padding-bottom: 10px;margin-left:50px; "></p>
+					<div class="wrap-input100 validate-input" style="margin-left: 50px;width:75%;margin-bottom:15px;">
 						<span class="label-input100">Country</span>
 						<select id="country" class="input100" name="country" onChange="getState(this.value);">
 							<option value="">Select Country</option>
@@ -353,20 +366,22 @@ function MethodUpdate(val){
 	</select>
 						
 					</div>
-
-					<div class="wrap-input100 id_100 validate-input" style="margin-left: 50px;width:75%;" data-validate="state is required">
+<p id="c" style="color:red;font-size:20px;padding-bottom: 10px;margin-left:50px; "></p>
+					<div class="wrap-input100 id_100 validate-input" style="margin-left: 50px;width:75%;margin-bottom:15px;">
 						<span class="label-input100">State</span>
 						<select id="state" class="input100" name="state" onChange="getCity(this.value)">
 	<option>Select State</option>
 	</select><span class="focus-input100"></span>
 					</div>
+		<p id="s" style="color:red;font-size:20px;padding-bottom: 10px;margin-left:50px; "></p>
 					
-					<div class="wrap-input100 validate-input" style="margin-left: 50px;width:75%;" data-validate="city is required">
+					<div class="wrap-input100 validate-input" style="margin-left: 50px;width:75%;margin-bottom:15px;">
 						<span class="label-input100">City</span>
 						<select id="city" class="input100" name="city" >
 	<option value="">Select City</option>
 	</select>	<span class="focus-input100"></span>
 					</div>
+		<p id="citi" style="color:red;font-size:20px;padding-bottom: 10px;margin-left:50px; "></p>
 					
 					<div class="container-login100-form-btn">
 						<div class="wrap-login100-form-btn" style="margin-left: 50px;width:75%; margin-bottom: 100px;" >
