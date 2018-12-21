@@ -26,18 +26,50 @@ else{
 }
 
 ?>
+
 <html>
 	<head>
 		<title>Php Developer</title>
 		<link rel="stylesheet" type="text/css" href="style.css"/>	
 	</head>
+	<script type="text/javascript">
+function ValidateForm(){
+	
+	var email=document.Myform.email.value;
+	if(email == null ||email == "")
+	{
+		alert("email id cannot be blank");
+		return false;
+	}
+	else{
+		if (!(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email)))
+		  {
+		   alert("You have entered an invalid email address!")
+		    return false;
+		  }
+	}
+	
+	var password=document.Myform.pass.value;
+	if(password == null ||password == "")
+	{
+		alert("Please enter password");
+		return false;
+	}	
+	if(password.length < 3 || password.length >8)
+	{
+		alert(" password contain atleast 3 chracters and does not contain morethan 10characters");
+		return false;
+	}
+	
+}
+</script>
 	<body>
 		<div class="limiter">
 		<div class="container-login100">
 			<div class="login100-more" style="background-image: url('images/bg-01.jpg');"></div>
 
 			<div class="wrap-login100 p-l-50 p-r-50 p-t-72 p-b-50">
-				<form class="login100-form validate-form" action="" method="POST">
+				<form class="login100-form validate-form" action="" method="POST" name="Myform" onSubmit="return ValidateForm()">
 					<span class="login100-form-title p-b-59">
 						Sign in
 					</span>
