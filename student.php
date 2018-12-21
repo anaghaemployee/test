@@ -287,18 +287,16 @@ function MethodUpdate(val){
 			echo "<td>".$row['city']."</td>";
 			echo "<td>".$row['state']."</td>";
 			echo "<td>".$row['country']."</td>";			
-			echo "<td>";
-		?><?php
-			echo "</td>";
+			
 			echo "<td>";
 			echo "<button  onClick=\"MethodUpdate($row[userId])\">";
 			?>
-			<img src="images/edit.jpg" style="height:20px;width:10px;">
+			<span class="glyphicon glyphicon-pencil"></span>
 			<?php
-			echo "</a>|"; 
-			echo  "<button  onClick=\"MethodDelete($row[userId])\">";
+			echo "</button>|"; 
+			echo  "<button class='button' onClick=\"MethodDelete($row[userId])\">";
 			?>
-			<img src="images/delete.jpg" style="height:20px;width:10px;">
+			<span class="glyphicon glyphicon-trash"></span>
 			<?php
 			echo "</button>";
 			echo "</td>"; 
